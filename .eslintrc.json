@@ -1,17 +1,18 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "airbnb"
-  ],
+  "extends": ["next/core-web-vitals", "airbnb"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
+    "max-len": ["error", 80, 2],
     "arrow-body-style": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "import/prefer-default-export": "off",
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "react/function-component-definition": [
       2,
       {
@@ -28,15 +29,12 @@
         "ts": "never",
         "tsx": "never"
       }
-   ],
-   "import/no-extraneous-dependencies":[
-    "error",
-    {
-       "devDependencies":[
-          "**/*.test.ts",
-          "**/*.test.tsx"
-       ]
-    }
-  ]
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts", "**/*.test.tsx"]
+      }
+    ]
   }
 }
