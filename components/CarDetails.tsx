@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import { Car } from '@/types/Car';
 import { Dialog, Transition } from '@headlessui/react';
 import Image from 'next/image';
+import genarateCarImgUrl from '@/utils/carImageUrl';
 
 type Props = {
   isOpen: boolean;
@@ -76,7 +77,7 @@ const CarDetails: React.FC<Props> = ({ isOpen, car, closeModal }) => {
                     bg-pattern bg-cover bg-center rounded-lg"
                   >
                     <Image
-                      src="/hero.png"
+                      src={genarateCarImgUrl(car, '01')}
                       fill
                       priority
                       alt="Car model"
@@ -90,7 +91,7 @@ const CarDetails: React.FC<Props> = ({ isOpen, car, closeModal }) => {
                       bg-primary-blue-100 rounded-lg"
                     >
                       <Image
-                        src="/hero.png"
+                        src={genarateCarImgUrl(car, '33')}
                         fill
                         priority
                         alt="Car model"
@@ -103,7 +104,7 @@ const CarDetails: React.FC<Props> = ({ isOpen, car, closeModal }) => {
                       bg-primary-blue-100 rounded-lg"
                     >
                       <Image
-                        src="/hero.png"
+                        src={genarateCarImgUrl(car, '29')}
                         fill
                         priority
                         alt="Car model"
@@ -116,7 +117,7 @@ const CarDetails: React.FC<Props> = ({ isOpen, car, closeModal }) => {
                       bg-primary-blue-100 rounded-lg"
                     >
                       <Image
-                        src="/hero.png"
+                        src={genarateCarImgUrl(car, '13')}
                         fill
                         priority
                         alt="Car model"

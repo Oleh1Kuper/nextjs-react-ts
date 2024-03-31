@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Car } from '@/types/Car';
 import calculateCarRent from '@/utils/getCarRent';
 import Image from 'next/image';
+import genarateCarImgUrl from '@/utils/carImageUrl';
 import CustomButton from './CustomButton';
 import CarDetails from './CarDetails';
 
@@ -41,7 +42,7 @@ const CarCard: React.FC<Props> = ({ car }) => {
 
       <div className="relative w-full h-40 my-3">
         <Image
-          src="/hero.png"
+          src={genarateCarImgUrl(car, '01')}
           fill
           priority
           alt="Car model"

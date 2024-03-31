@@ -8,10 +8,8 @@ import { Car } from '@/types/Car';
 
 const Home = async () => {
   const cars = await new ClientApi('/v1/cars').getAll<Car>({
-    params: { model: 'corolla' },
+    params: { model: 'q3' },
   });
-
-  console.log(cars);
 
   return (
     <main className="overflow-hidden">
