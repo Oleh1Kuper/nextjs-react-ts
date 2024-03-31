@@ -2,15 +2,30 @@
 
 import React, { FormEvent, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import SearchManufacturer from './SearchManufacturer';
 import SearchButton from './SearchButton';
 
 const SearchBar = () => {
   const [manufacturer, setManufacturer] = useState('');
   const [model, setModel] = useState('');
+  const router = useRouter();
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    if (!model && !manufacturer) {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+
+    params.set('model', model.toLowerCase());
+    params.set('manufacturer', manufacturer.toLowerCase());
+
+    const newPathName = `${window.location.pathname}?${params}`;
+
+    router.push(newPathName);
   };
 
   return (
