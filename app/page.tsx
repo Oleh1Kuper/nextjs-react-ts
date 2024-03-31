@@ -7,7 +7,9 @@ import CarCard from '@/components/CarCard';
 import { Car } from '@/types/Car';
 
 const Home = async () => {
-  const cars = await ClientApi.getAll<Car>({ params: { model: 'corolla' } });
+  const cars = await new ClientApi('/v1/cars').getAll<Car>({
+    params: { model: 'corolla' },
+  });
 
   console.log(cars);
 

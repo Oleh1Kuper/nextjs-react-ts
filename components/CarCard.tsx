@@ -1,16 +1,18 @@
 'use client';
 
-import React, {} from 'react';
+import React, { useState } from 'react';
 import { Car } from '@/types/Car';
 import calculateCarRent from '@/utils/getCarRent';
 import Image from 'next/image';
 import CustomButton from './CustomButton';
+import CarDetails from './CarDetails';
 
 type Props = {
   car: Car;
 };
 
 const CarCard: React.FC<Props> = ({ car }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     model,
     make,
@@ -93,13 +95,19 @@ const CarCard: React.FC<Props> = ({ car }) => {
           <CustomButton
             containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
             textStyles="text-white text-[14px] leading-[17px] font-bold"
-            handleClick={() => {}}
+            handleClick={() => setIsOpen(true)}
             rightIcon="/right-arrow.svg"
           >
             View more
           </CustomButton>
         </div>
       </div>
+
+      <CarDetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={car}
+      />
     </div>
   );
 };

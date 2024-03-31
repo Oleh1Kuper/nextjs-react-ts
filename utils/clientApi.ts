@@ -9,11 +9,16 @@ const axiosInstance = axios.create({
 });
 
 class ClientApi {
-  // eslint-disable-next-line class-methods-use-this
+  endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
+
   getAll = <T>(requestConfig: AxiosRequestConfig) => {
-    return axiosInstance.get<T[]>('/v1/cars', requestConfig)
+    return axiosInstance.get<T[]>(this.endpoint, requestConfig)
       .then(({ data }) => data);
   };
 }
 
-export default new ClientApi();
+export default ClientApi;
