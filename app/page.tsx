@@ -1,22 +1,35 @@
 import React from 'react';
 import Hero from '@/components/Hero';
 import SearchBar from '@/components/SearchBar';
+import CustomFilter from '@/components/CustomFilter';
+import clientApi from '@/utils/clientApi';
 
-const Home = () => (
-  <main className="overflow-hidden">
-    <Hero />
+const Home = async () => {
+  const cars = await clientApi.getAll({ params: { model: 'corolla' } });
 
-    <div className="mt-12 padding-x padding-y max-width" id="discover">
-      <div className="home__text-container">
-        <h2 className="text-4xl">Car Catalogue</h2>
-        <p>Explore out cars you might like</p>
+  console.log(cars);
 
-        <div className="home__filters">
-          <SearchBar />
+  return (
+    <main className="overflow-hidden">
+      <Hero />
+
+      <div className="mt-12 padding-x padding-y max-width" id="discover">
+        <div className="home__text-container">
+          <h2 className="text-4xl">Car Catalogue</h2>
+          <p>Explore out cars you might like</p>
+
+          <div className="home__filters">
+            <SearchBar />
+
+            <div className="home__filter-container">
+              <CustomFilter />
+              <CustomFilter />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
-);
+    </main>
+  );
+};
 
 export default Home;

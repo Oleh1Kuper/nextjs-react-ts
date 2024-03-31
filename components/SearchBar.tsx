@@ -6,8 +6,6 @@ import SearchManufacturer from './SearchManufacturer';
 const SearchBar = () => {
   const [manufacturer, setManufacturer] = useState('');
 
-  console.log(manufacturer);
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
   };
