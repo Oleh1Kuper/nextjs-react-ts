@@ -10,8 +10,8 @@ const axiosInstance = axios.create({
 
 class ClientApi {
   // eslint-disable-next-line class-methods-use-this
-  getAll = (requestConfig: AxiosRequestConfig) => {
-    return axiosInstance.get('/v1/cars', requestConfig)
+  getAll = <T>(requestConfig: AxiosRequestConfig) => {
+    return axiosInstance.get<T[]>('/v1/cars', requestConfig)
       .then(({ data }) => data);
   };
 }

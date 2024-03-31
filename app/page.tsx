@@ -2,10 +2,12 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import SearchBar from '@/components/SearchBar';
 import CustomFilter from '@/components/CustomFilter';
-import clientApi from '@/utils/clientApi';
+import ClientApi from '@/utils/clientApi';
+import CarCard from '@/components/CarCard';
+import { Car } from '@/types/Car';
 
 const Home = async () => {
-  const cars = await clientApi.getAll({ params: { model: 'corolla' } });
+  const cars = await ClientApi.getAll<Car>({ params: { model: 'corolla' } });
 
   console.log(cars);
 
@@ -26,6 +28,14 @@ const Home = async () => {
               <CustomFilter />
             </div>
           </div>
+
+          <section>
+            <div className="home__cars-wrapper">
+              {cars.map((car) => (
+                <CarCard car={car} />
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </main>
