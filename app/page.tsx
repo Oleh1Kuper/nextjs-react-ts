@@ -5,10 +5,27 @@ import CustomFilter from '@/components/CustomFilter';
 import ClientApi from '@/utils/clientApi';
 import CarCard from '@/components/CarCard';
 import { Car } from '@/types/Car';
+import { fuels, yearsOfProduction } from '@/constants';
 
-const Home = async () => {
+type SearchParams = {
+  searchParams: {
+    model: string;
+    year: string;
+    fuel: string;
+    manufacturer: string;
+    limit: number;
+  }
+}
+
+const Home = async ({ searchParams }: SearchParams) => {
   const cars = await new ClientApi('/v1/cars').getAll<Car>({
-    params: { model: 'q3' },
+    params: {
+      fuel_type: searchParams.fuel || '',
+      limit: searchParams.limit || 10,
+      model: searchParams.model || 'q3',
+      // manufacturer: searchParams.manufacturer || '',
+      year: searchParams.year,
+    },
   });
 
   return (
@@ -24,12 +41,12 @@ const Home = async () => {
             <SearchBar />
 
             <div className="home__filter-container">
-              <CustomFilter />
-              <CustomFilter />
+              <CustomFilter title="Fuel" options={fuels} />
+              <CustomFilter title="Year" options={yearsOfProduction} />
             </div>
           </div>
 
-          <section>
+          <section className="w-full">
             <div className="home__cars-wrapper">
               {cars.map((car) => (
                 <CarCard car={car} />

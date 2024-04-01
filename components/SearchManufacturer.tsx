@@ -9,6 +9,7 @@ import React, {
 import Image from 'next/image';
 import { Combobox, Transition } from '@headlessui/react';
 import { manufacturers } from '@/constants';
+import setActiveClass from '@/utils/setActiveClass';
 
 type Props = {
   manufacturer: string;
@@ -28,14 +29,6 @@ const SearchManufacturer: React.FC<Props> = ({
       return item.toLowerCase().includes(normalizeQuery);
     })
     : manufacturers;
-
-  const setActiveClass = ({ active }: { active: boolean }) => {
-    const className = 'relative search-manufacturer__option';
-
-    return active
-      ? `${className} bg-primary-blue text-white`
-      : `${className} text-gray-900`;
-  };
 
   return (
     <div className="search-manufacturer">
@@ -70,7 +63,8 @@ const SearchManufacturer: React.FC<Props> = ({
                 <Combobox.Option
                   key={item}
                   value={item}
-                  className={setActiveClass}
+                  className={({ active }) => `relative
+                  search-manufacturer__option ${setActiveClass(active)}`}
                 >
                   {item}
                 </Combobox.Option>
