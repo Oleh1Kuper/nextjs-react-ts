@@ -6,6 +6,7 @@ import ClientApi from '@/utils/clientApi';
 import CarCard from '@/components/CarCard';
 import { Car } from '@/types/Car';
 import { fuels, yearsOfProduction } from '@/constants';
+import ShowMore from '@/components/ShowMore';
 
 type SearchParams = {
   searchParams: {
@@ -14,13 +15,14 @@ type SearchParams = {
     fuel: string;
     manufacturer: string;
     limit: number;
-  }
-}
+    pageNumber: number;
+  };
+};
 
 const Home = async ({ searchParams }: SearchParams) => {
   const cars = await new ClientApi('/v1/cars').getAll<Car>({
     params: {
-      fuel_type: searchParams.fuel || '',
+      fuel: searchParams.fuel || '',
       limit: searchParams.limit || 10,
       model: searchParams.model || 'q3',
       // manufacturer: searchParams.manufacturer || '',
@@ -52,6 +54,11 @@ const Home = async ({ searchParams }: SearchParams) => {
                 <CarCard car={car} />
               ))}
             </div>
+
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > cars.length}
+            />
           </section>
         </div>
       </div>

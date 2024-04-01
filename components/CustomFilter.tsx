@@ -5,6 +5,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import Image from 'next/image';
 import setActiveClass from '@/utils/setActiveClass';
 import { useRouter } from 'next/navigation';
+import updateSearchParams from '@/utils/updateSearchParams';
 
 type Option = {
   title: string;
@@ -21,17 +22,9 @@ const CustomFilter: React.FC<Props> = ({ title, options }) => {
   const route = useRouter();
 
   const handleUpdateParams = ({ value }: Option) => {
-    const params = new URLSearchParams(window.location.search);
+    const params = updateSearchParams(title, value);
 
-    if (value) {
-      params.set(title, value.toLowerCase());
-    } else {
-      params.delete(title);
-    }
-
-    const newPathName = `${window.location.pathname}?${params}`;
-
-    route.push(newPathName, { scroll: false });
+    route.push(params, { scroll: false });
   };
 
   return (
