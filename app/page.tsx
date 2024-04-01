@@ -24,8 +24,7 @@ const Home = async ({ searchParams }: SearchParams) => {
     params: {
       fuel: searchParams.fuel || '',
       limit: searchParams.limit || 10,
-      model: searchParams.model || 'q3',
-      // manufacturer: searchParams.manufacturer || '',
+      model: searchParams.model || 'q7',
       year: searchParams.year,
     },
   });
