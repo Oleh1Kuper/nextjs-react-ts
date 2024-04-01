@@ -7,6 +7,7 @@ import CarCard from '@/components/CarCard';
 import { Car } from '@/types/Car';
 import { fuels, yearsOfProduction } from '@/constants';
 import ShowMore from '@/components/ShowMore';
+import { v4 as uuidv4 } from 'uuid';
 
 type SearchParams = {
   searchParams: {
@@ -22,7 +23,7 @@ type SearchParams = {
 const Home = async ({ searchParams }: SearchParams) => {
   const cars = await new ClientApi('/v1/cars').getAll<Car>({
     params: {
-      fuel: searchParams.fuel || '',
+      fuel_type: searchParams.fuel || '',
       limit: searchParams.limit || 10,
       model: searchParams.model || 'q7',
       year: searchParams.year,
@@ -49,9 +50,11 @@ const Home = async ({ searchParams }: SearchParams) => {
 
           <section className="w-full">
             <div className="home__cars-wrapper">
-              {cars.map((car) => (
-                <CarCard car={car} />
-              ))}
+              {cars.length ? (
+                cars.map((car) => <CarCard key={uuidv4()} car={car} />)
+              ) : (
+                <p className="text-primary-blue">No cars with these params</p>
+              )}
             </div>
 
             <ShowMore
